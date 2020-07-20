@@ -34,54 +34,93 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
           stream: bloc.minuteSms,
           builder: (context, snapshot) {
             if (snapshot.hasData)
-              return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          onTap: () {
-                            bloc.showButtons[index].value =
-                                !bloc.showButtons[index].value;
-                          },
-                          leading: Text(snapshot.data[index].titleRu),
-                          trailing: Text(
-                            snapshot.data[index].price,
-                            style: TextStyle(color: Colors.indigo.shade900),
-                          ),
-                        ),
-                        ValueListenableBuilder(
-                            valueListenable: bloc.showButtons[index],
-                            builder: (ctx, v, w) {
-                              if (v)
-                                return Container(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          bloc.showButtons[index].value =
-                                              !bloc.showButtons[index].value;
-                                        },
-                                        child: Container(
-                                          child:
-                                              Text(snapshot.data[index].descRu),
-//                                            parse(parse(data.description).body.text).documentElement.text
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (snapshot.data[index].catUz != null &&
+                              snapshot.data[index].catUz != '')
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  context.locale.languageCode == 'ru'
+                                      ? snapshot.data[index].catRu
+                                      : snapshot.data[index].catUz,
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor),
+                                ),
+                                Divider()
+                              ],
+                            )
+                          else
+                            Container(),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                onTap: () {
+                                  bloc.showButtons[index].value =
+                                      !bloc.showButtons[index].value;
+                                },
+                                leading: Text(snapshot.data[index].titleRu),
+                                trailing: Text(
+                                  snapshot.data[index].price,
+                                  style:
+                                      TextStyle(color: Colors.indigo.shade900),
+                                ),
+                              ),
+                              ValueListenableBuilder(
+                                  valueListenable: bloc.showButtons[index],
+                                  builder: (ctx, v, w) {
+                                    if (v)
+                                      return Container(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                bloc.showButtons[index].value =
+                                                    !bloc.showButtons[index]
+                                                        .value;
+                                              },
+                                              child: Container(
+                                                child: Text(context.locale
+                                                            .languageCode ==
+                                                        'ru'
+                                                    ? snapshot
+                                                        .data[index].descRu
+                                                        .replaceAll(
+                                                            '<br>', '\n')
+                                                    : snapshot
+                                                        .data[index].descUz
+                                                        .replaceAll(
+                                                            '<br>', '\n')),
+                                              ),
+                                            ),
+                                            BalanceButton(
+                                              title: "buy".tr(),
+                                            )
+                                          ],
                                         ),
-                                      ),
-                                      BalanceButton(
-                                        title: "buy".tr(),
-                                      )
-                                    ],
-                                  ),
-                                );
-                              else
-                                return Container();
-                            })
-                      ],
-                    );
-                  });
+                                      );
+                                    else
+                                      return Container();
+                                  })
+                            ],
+                          ),
+                        ],
+                      );
+                    }),
+              );
             else {
               return Container();
             }

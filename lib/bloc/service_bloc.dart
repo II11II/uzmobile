@@ -23,8 +23,8 @@ class ServiceBloc extends BaseBloc {
           descrUz: """
 4G LTE Toshkent shahrining har bir qismida va Samarqand shahrida!  70 Mbit/sgacha tezlik. 4G LTEni 3G narxida taklif etadi! 4G LTE 4G-modulga ega barcha zamonaviy qurilmalarda.
         """,
-          codeApply: "*222*1#",
-          codeDeny: "*222*0#"),
+          codeApply: "tel://*222*1#",
+          codeDeny: "tel://*222*0#"),
       Service(
           titleUz: "AntiAON",
           titleRu: "АнтиАОН",
@@ -34,8 +34,8 @@ class ServiceBloc extends BaseBloc {
           descrUz: """
 Raqamnianiqlashga qarshilik xizmatiimkonini beradiabonentga istalgan UMS abonenti telefon raqamiga chiquvchi qo‘ng‘iroqlarda o‘z tеlеfon raqamini aniqlashni taqiqlash yoki ruxsat berish imkonini beradi. Boshqa tarmoqlar abonеntlariga, jumladan, umumiy foydalanishdagi chiquvchi qo‘ng‘iroqlarda raqamni aniqlashni taqiqlashni kafolatlanmaydi.
      """,
-          codeApply: "*111*0101#",
-          codeSet: "*111*0100#"),
+          codeApply: "tel://*111*0101#",
+          codeSet: "tel://*111*0100#"),
       Service(
           titleUz: "Chaqiriqni kutish va ushlabturish",
           titleRu: "Ожидание и удержание вызова",
@@ -44,8 +44,8 @@ Raqamnianiqlashga qarshilik xizmatiimkonini beradiabonentga istalgan UMS abonent
     """,
           descrUz: """
 Suhbat mobaynida javob berish jarayonida boshqa abonent kirish qo‘ng‘iroqlari (yoki qo‘ng‘iroq qilgan boshqaabonent) Chaqiriqni kutish rejimi imkonini beradi va kirish chaqiriqlarini mazkur joriy suhbat tugagunigaqada rushlabturadi, ya’ninavbatma-navba tikki abonеnt bilan suhbatlashadi.      """,
-          codeApply: "*43#",
-          codeDeny: "*43#"),
+          codeApply: "tel://*43#",
+          codeDeny: "tel://*43#"),
       Service(
           titleUz: "Va’da qilingan to‘lov",
           titleRu: "Обещанный платеж",
@@ -55,8 +55,8 @@ Suhbat mobaynida javob berish jarayonida boshqa abonent kirish qo‘ng‘iroqlar
           descrUz: """
           Ushbu xizmat kelgusida to‘lanadigan mablag‘ hisobidan aloqa xizmatlaridan foydalanishni davom ettirish uchun o‘z hisobvarag‘ingizga 3 kun muddatga 3 \$ tushirish imkonini beradi. Ushbu xizmat hatto bloklangan holatda (oldindan to'lovi yoq), -2\$ (minus ikki) dan ortiq balansida abonentlarga amal qiladi. Xizmatni faollashtirish narxi 0,5 \$
         """,
-          codeApply: "*111*32#",
-          codeSet: "*111*320#"),
+          codeApply: "tel://*111*32#",
+          codeSet: "tel://*111*320#"),
       Service(
         titleUz: "«Menga qo’ng’iroq qil!»",
         titleRu: "Перезвони мне!",
@@ -66,7 +66,7 @@ Suhbat mobaynida javob berish jarayonida boshqa abonent kirish qo‘ng‘iroqlar
         descrUz: """
 Ushbu xizmat O’zbekistonning barcha uyali aloqa operatorlari va MTS-Rossiya abonentlariga ular qo’ng’iroq qilishlarini iltimos qilib, tez va oson so’rov yuborish imkonini beradi.
         """,
-        codeApply: "*110*kod#",
+        codeApply: "tel://*110*998900000000#",
       ),
       Service(
         titleUz: "Bir martalik AntiAON",
@@ -77,7 +77,7 @@ Ushbu xizmat O’zbekistonning barcha uyali aloqa operatorlari va MTS-Rossiya ab
         descrUz: """
 «Bir martalik AntiAON» xizmati sizga chaqirilayotgan abonentga o‘z raqamingizni ko‘rsatmaslik imkonini beradi. Ushbu servis bir marta taqdim etiladi va buning uchun uni maxsus ulash shart emas.
      """,
-        codeApply: "#kod",
+        codeApply: "tel://#998900000000",
       ),
     ]);
   }

@@ -5,8 +5,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:html/dom.dart' as h;
-import 'package:html/parser.dart' as h;
 import 'package:mobiuz/bloc/rate_bloc.dart';
 import 'package:mobiuz/model/all.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -81,19 +79,39 @@ class _RatePageState extends State<RatePage> {
                                       javascriptMode: JavascriptMode.disabled,
                                       debuggingEnabled: false,
                                       onWebViewCreated: (c) {
-                                        h.Document parsedHtml;
-                                        parsedHtml.text;
                                         String html;
+
                                         if (context.locale.languageCode ==
                                             'ru') {
-                                          html = snapshot.data[index].descrRu;
-                                          parsedHtml = h.parse(
-                                              snapshot.data[index].descrRu);
+                                          html = snapshot.data[index].descrRu
+//                                              .replaceAll('ic_sms.png',
+//                                                  'file:///assets/icon/ic_sms.png')
+//                                              .replaceAll('ic_phone.png',
+//                                                  'file:///android_asset/assets/icon/ic_phone.png')
+//                                              .replaceAll('ic_chart.png',
+//                                                  'file:///android_asset/assets/icon/ic_chart.png')
+//                                              .replaceAll('ic_gift.png',
+//                                                  'file:///android_asset/assets/icon/ic_gift.png');
+                                              .replaceAll('ic_sms.png',
+                                                  'https://i.ibb.co/gZB1fzB/ic-sms.png')
+                                              .replaceAll('ic_phone.png',
+                                                  'https://i.ibb.co/c279b5g/ic-phone.png')
+                                              .replaceAll('ic_chart.png',
+                                                  'https://i.ibb.co/ZNbmwsK/ic-chart.png')
+                                              .replaceAll('ic_gift.png',
+                                                  'https://i.ibb.co/HVWYFHD/ic-gift.png');
                                         } else {
-                                          html = snapshot.data[index].descrUz;
-                                          parsedHtml = h.parse(
-                                              snapshot.data[index].descrUz);
+                                          html = snapshot.data[index].descrUz
+                                              .replaceAll('ic_phone.png',
+                                                  'https://i.ibb.co/c279b5g/ic-phone.png')
+                                              .replaceAll('ic_sms.png',
+                                                  'https://i.ibb.co/gZB1fzB/ic-sms.png')
+                                              .replaceAll('ic_chart.png',
+                                                  'https://i.ibb.co/ZNbmwsK/ic-chart.png')
+                                              .replaceAll('ic_gift.png',
+                                                  'https://i.ibb.co/HVWYFHD/ic-gift.png');
                                         }
+                                        print(html);
                                         c.loadString(html);
                                       },
                                     ),

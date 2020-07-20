@@ -19,6 +19,9 @@ class Repository {
   Future<List<Tarifs>> getTarifs() => _db.getTarifs();
   Future<List<Ism>> getIsms() => _db.getIsms();
   Future<List<Ism>> get getMinuteSms => _db.getMinuteSms();
+  Future<List<Ism>> get getInternetNight => _db.getInternetNight();
+  Future<List<Ism>> get getInternetOnnet => _db.getInternetOnnet();
+  Future<List<Ism>> get getInternetPaketi => _db.getInternetPaketi();
   Future<int> insertTarifs(Tarifs table) => _db.insertTarifs(table);
   Future<int> insertIsm(Ism table) => _db.insertIsm(table);
   Future<int> updateTarifs(Tarifs table) => _db.updateTarifs(table);

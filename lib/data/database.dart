@@ -131,8 +131,60 @@ create table ${Ism.tableName} (
 
   Future<List<Ism>> getMinuteSms() async {
     await open();
-    List<Map> maps = await db.query(Ism.tableName,
-        where: "${IsmEnum.catid.toString().split('.').last}='0'");
+    List<Map> maps = await db.query(
+      Ism.tableName,
+      where: "${IsmEnum.catid.toString().split('.').last}='0'",
+    );
+    await close();
+    if (maps.length > 0) {
+      return maps.map((e) => Ism.fromJson(e)).toList();
+    }
+    return null;
+  }
+
+  Future<List<Ism>> getInternetOnnet() async {
+    await open();
+    List<Map> maps = await db.query(
+      Ism.tableName,
+      where: "${IsmEnum.catid.toString().split('.').last}='5'",
+    );
+    print("onnet : ${maps}");
+    await close();
+    if (maps.length > 0) {
+      return maps.map((e) => Ism.fromJson(e)).toList();
+    }
+    return null;
+  }
+
+  Future<List<Ism>> getInternetNight() async {
+    await open();
+    List<Map> maps = await db.query(
+      Ism.tableName,
+      where: "${IsmEnum.catid.toString().split('.').last}='4'"
+          ' or '
+          "${IsmEnum.catid.toString().split('.').last}='6'",
+    );
+    print("night : ${maps}");
+
+    await close();
+    if (maps.length > 0) {
+      return maps.map((e) => Ism.fromJson(e)).toList();
+    }
+    return null;
+  }
+
+  Future<List<Ism>> getInternetPaketi() async {
+    await open();
+    List<Map> maps = await db.query(
+      Ism.tableName,
+      where: "${IsmEnum.catid.toString().split('.').last}='1'"
+          ' or '
+          "${IsmEnum.catid.toString().split('.').last}='2'"
+          ' or '
+          "${IsmEnum.catid.toString().split('.').last}='3'",
+    );
+    print("paketi : ${maps}");
+
     await close();
     if (maps.length > 0) {
       return maps.map((e) => Ism.fromJson(e)).toList();

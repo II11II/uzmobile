@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'ui/page/home_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     EasyLocalization(
         supportedLocales: [Locale('ru', 'RU'), Locale('uz', 'UZ')],
