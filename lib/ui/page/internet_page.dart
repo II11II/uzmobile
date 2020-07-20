@@ -7,7 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mobiuz/bloc/internet_bloc.dart';
+import 'package:mobiuz/model/all.dart';
 import 'package:mobiuz/ui/widget/balance_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InternetPage extends StatefulWidget {
   @override
@@ -82,8 +84,6 @@ class _InternetPageState extends State<InternetPage> {
                           else
                             return Container();
                         }),
-//                  customTab(bloc.night, bloc.showButtonsNight),
-//                  customTab(bloc.onnet, bloc.showButtonsOnnet)
                   ],
                 ),
               ]),
@@ -94,7 +94,7 @@ class _InternetPageState extends State<InternetPage> {
     );
   }
 
-  Widget customTab(data, showButtons) {
+  Widget customTab(List<Ism> data, showButtons) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.70,
       child: Padding(
@@ -164,6 +164,13 @@ class _InternetPageState extends State<InternetPage> {
                                     ),
                                     BalanceButton(
                                       title: "buy".tr(),
+                                      onPressed: () async {
+                                        String urlString =
+                                            'tel://${data[index].kod}';
+                                        if (await canLaunch(urlString)) {
+                                          await launch(urlString);
+                                        }
+                                      },
                                     )
                                   ],
                                 ),

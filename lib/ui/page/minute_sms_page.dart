@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:mobiuz/bloc/minute_sms_bloc.dart';
 import 'package:mobiuz/model/all.dart';
 import 'package:mobiuz/ui/widget/balance_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MinuteSmsPage extends StatefulWidget {
   @override
@@ -108,6 +109,14 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                             ),
                                             BalanceButton(
                                               title: "buy".tr(),
+                                              onPressed: () async {
+                                                String urlString =
+                                                    'tel://${snapshot.data[index].kod}';
+                                                if (await canLaunch(
+                                                    urlString)) {
+                                                  await launch(urlString);
+                                                }
+                                              },
                                             )
                                           ],
                                         ),
