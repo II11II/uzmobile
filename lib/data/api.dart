@@ -26,4 +26,15 @@ class Api {
           "getAllData: response status code ${response.statusCode}\nresponse body ${response.body} ");
     }
   }
+  Future<String> getNews(String localization) async {
+    final String _kNews = "https://mobi.uz/$localization/news/rss";
+
+    final response = await http.get(_kNews);
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+     return response.body;
+    } else {
+      throw HttpException(
+          "getNews: response status code ${response.statusCode}\nresponse body ${response.body} ");
+    }
+  }
 }
