@@ -25,7 +25,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final bloc = HomeBloc();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+@override
+  void initState() {
+   bloc.getData().then((value) {
+     _scaffoldKey.currentState.showSnackBar(SnackBar(
+       content: Text(value.tr()),duration: Duration(milliseconds: 700),
+     ));
 
+   });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,8 +183,8 @@ class _HomePageState extends State<HomePage> {
         BottomNavigationBarItem(
             icon: Icon(Icons.home), title: Text('home'.tr())),
         BottomNavigationBarItem(
-          icon: Icon(Icons.cached),
-          title: Text('refresh'.tr()),
+          icon: Icon(Icons.sim_card),
+          title: Text('cabinet'.tr()),
         ),
       ],
       currentIndex: 1,
@@ -187,16 +196,9 @@ class _HomePageState extends State<HomePage> {
           }
         }
         if (index == 2) {
-          String data;
-          showAlert(_scaffoldKey.currentState.context, "refresh_db".tr(),
-              () async {
-            Navigator.pop(context);
-
-            data = await bloc.getData();
-            _scaffoldKey.currentState.showSnackBar(SnackBar(
-              content: Text(data.tr()),
-            ));
-          });
+          String urlString="https://ip.mobi.uz/selfcare";
+         if(await canLaunch(urlString))
+           launch(urlString);
         }
       },
       selectedItemColor: Theme.of(context).primaryColor,

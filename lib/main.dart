@@ -9,7 +9,7 @@ void main() {
     EasyLocalization(
         supportedLocales: [Locale('ru', 'RU'), Locale('uz', 'UZ')],
         path: 'assets/translations',
-        fallbackLocale: Locale('en', 'US'),
+        fallbackLocale: Locale('uz', 'UZ'),
         child: MyApp()),
   );
 }

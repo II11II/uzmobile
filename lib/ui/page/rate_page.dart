@@ -80,18 +80,9 @@ class _RatePageState extends State<RatePage> {
                                       debuggingEnabled: false,
                                       onWebViewCreated: (c) {
                                         String html;
-
                                         if (context.locale.languageCode ==
                                             'ru') {
                                           html = snapshot.data[index].descrRu
-//                                              .replaceAll('ic_sms.png',
-//                                                  'file:///assets/icon/ic_sms.png')
-//                                              .replaceAll('ic_phone.png',
-//                                                  'file:///android_asset/assets/icon/ic_phone.png')
-//                                              .replaceAll('ic_chart.png',
-//                                                  'file:///android_asset/assets/icon/ic_chart.png')
-//                                              .replaceAll('ic_gift.png',
-//                                                  'file:///android_asset/assets/icon/ic_gift.png');
                                               .replaceAll('ic_sms.png',
                                                   'https://i.ibb.co/gZB1fzB/ic-sms.png')
                                               .replaceAll('ic_phone.png',
