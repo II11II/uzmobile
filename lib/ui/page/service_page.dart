@@ -28,7 +28,7 @@ class _ServicePageState extends State<ServicePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('service'.tr()),
+        title: Text('services'.tr().toUpperCase()),
       ),
       body: StreamBuilder<List<Service>>(
           stream: bloc.services,

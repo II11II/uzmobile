@@ -20,13 +20,13 @@ class _InternetPageState extends State<InternetPage> {
   final bloc = InternetBloc();
   List<Tab> kTabs = [
     Tab(
-      child: Text('paketi'.tr()),
+      child: Text('paketi'.tr().toUpperCase()),
     ),
     Tab(
-      child: Text('night'.tr()),
+      child: Text('night'.tr().toUpperCase()),
     ),
     Tab(
-      child: Text('onnet'),
+      child: Text('onnet'.toUpperCase()),
     )
   ];
 
@@ -42,7 +42,7 @@ class _InternetPageState extends State<InternetPage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("internet".tr()),
+          title: Text("internet".tr().toUpperCase()),
         ),
         body: Column(
           children: [
@@ -163,7 +163,7 @@ class _InternetPageState extends State<InternetPage> {
                                       ),
                                     ),
                                     BalanceButton(
-                                      title: "buy".tr(),
+                                      title: "buy".tr().toUpperCase(),
                                       onPressed: () async {
                                         String urlString =
                                             'tel://${data[index].kod}';

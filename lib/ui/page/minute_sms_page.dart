@@ -29,7 +29,7 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("minute_sms".tr()),
+        title: Text("minute_sms".tr().toUpperCase()),
       ),
       body: StreamBuilder<List<Ism>>(
           stream: bloc.minuteSms,
@@ -72,7 +72,10 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                   bloc.showButtons[index].value =
                                       !bloc.showButtons[index].value;
                                 },
-                                leading: Text(snapshot.data[index].titleRu),
+                                leading: Text(
+                                    context.locale.languageCode == 'ru'
+                                        ? snapshot.data[index].titleRu
+                                        : snapshot.data[index].titleUz),
                                 trailing: Text(
                                   snapshot.data[index].price,
                                   style:
@@ -108,7 +111,7 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                               ),
                                             ),
                                             BalanceButton(
-                                              title: "buy".tr(),
+                                              title: "buy".tr().toUpperCase(),
                                               onPressed: () async {
                                                 String urlString =
                                                     'tel://${snapshot.data[index].kod}';

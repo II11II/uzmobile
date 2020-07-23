@@ -16,7 +16,7 @@ showAlert(BuildContext context, String title, Function onConfirm,
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("cancel".tr()),
+            child: Text("cancel".tr().toUpperCase()),
           ),
           FlatButton(
             onPressed: onConfirm,

@@ -18,7 +18,7 @@ class _BalancePageState extends State<BalancePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('balance'.tr()),
+        title: Text('balance'.tr().toUpperCase()),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -28,63 +28,63 @@ class _BalancePageState extends State<BalancePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               BalanceButton(
-                title: "check_balance".tr(),
+                title: "check_balance".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*100#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "check_internet_paket".tr(),
+                title: "check_internet_paket".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*102#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "check_sms_left".tr(),
+                title: "check_sms_left".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*104#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "check_minute_left".tr(),
+                title: "check_minute_left".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*103#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "my_expenses".tr(),
+                title: "my_expenses".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*111*025#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "prohibit_distribution".tr(),
+                title: "prohibit_distribution".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*111*0271#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "inline_services".tr(),
+                title: "inline_services".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*140#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "my_number".tr(),
+                title: "my_number".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*150#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "all_my_numbers".tr(),
+                title: "all_my_numbers".tr().toUpperCase(),
                 onPressed: () async {
                   String urlString = "tel://*151#";
                   if (await canLaunch(urlString)) launch(urlString);

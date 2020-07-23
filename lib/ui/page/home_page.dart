@@ -11,9 +11,9 @@ import 'package:mobiuz/bloc/home_bloc.dart';
 import 'package:mobiuz/ui/page/balance_page.dart';
 import 'package:mobiuz/ui/page/internet_page.dart';
 import 'package:mobiuz/ui/page/minute_sms_page.dart';
+import 'package:mobiuz/ui/page/news_page.dart';
 import 'package:mobiuz/ui/page/rate_page.dart';
 import 'package:mobiuz/ui/page/service_page.dart';
-import 'package:mobiuz/ui/widget/alert.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,16 +25,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final bloc = HomeBloc();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-@override
+  @override
   void initState() {
-   bloc.getData().then((value) {
-     _scaffoldKey.currentState.showSnackBar(SnackBar(
-       content: Text(value.tr()),duration: Duration(milliseconds: 700),
-     ));
-
-   });
+    bloc.getData().then((value) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text(value.tr()),
+        duration: Duration(milliseconds: 700),
+      ));
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Text('balance'.tr())
+                        Text('balance'.tr().toUpperCase())
                       ],
                     ),
                     Column(
@@ -99,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                             child: Image.asset('assets/icon/internet.png'),
                           ),
                         ),
-                        Text('internet'.tr())
+                        Text('internet'.tr().toUpperCase())
                       ],
                     ),
                     Column(
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                             child: Image.asset('assets/icon/tarifi.png'),
                           ),
                         ),
-                        Text('rates'.tr())
+                        Text('rates'.tr().toUpperCase())
                       ],
                     ),
                     Column(
@@ -134,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                             child: Image.asset('assets/icon/uslugi.png'),
                           ),
                         ),
-                        Text('services'.tr())
+                        Text('services'.tr().toUpperCase())
                       ],
                     ),
                     Column(
@@ -152,13 +153,17 @@ class _HomePageState extends State<HomePage> {
                             child: Image.asset('assets/icon/minuti.png'),
                           ),
                         ),
-                        Text('minute_sms'.tr())
+                        Text('minute_sms'.tr().toUpperCase())
                       ],
                     ),
                     Column(
                       children: [
                         FlatButton(
-                          onPressed: null,
+                          onPressed: () => Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (BuildContext context) =>
+                                      NewsPage())),
                           child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
@@ -166,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                             child: Image.asset('assets/icon/news.png'),
                           ),
                         ),
-                        Text('news'.tr())
+                        Text('news'.tr().toUpperCase())
                       ],
                     ),
                   ]),
@@ -179,12 +184,13 @@ class _HomePageState extends State<HomePage> {
     return BottomNavigationBar(
       items: [
         BottomNavigationBarItem(
-            icon: Icon(Icons.call), title: Text('call_center'.tr())),
+            icon: Icon(Icons.call),
+            title: Text('call_center'.tr().toUpperCase())),
         BottomNavigationBarItem(
-            icon: Icon(Icons.home), title: Text('home'.tr())),
+            icon: Icon(Icons.home), title: Text('home'.tr().toUpperCase())),
         BottomNavigationBarItem(
           icon: Icon(Icons.sim_card),
-          title: Text('cabinet'.tr()),
+          title: Text('cabinet'.tr().toUpperCase()),
         ),
       ],
       currentIndex: 1,
@@ -196,9 +202,8 @@ class _HomePageState extends State<HomePage> {
           }
         }
         if (index == 2) {
-          String urlString="https://ip.mobi.uz/selfcare";
-         if(await canLaunch(urlString))
-           launch(urlString);
+          String urlString = "https://ip.mobi.uz/selfcare";
+          if (await canLaunch(urlString)) launch(urlString);
         }
       },
       selectedItemColor: Theme.of(context).primaryColor,
@@ -212,7 +217,7 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: EdgeInsets.only(top: 16, left: 16),
             child: Text(
-              "More".tr(),
+              "more".tr(),
               style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,

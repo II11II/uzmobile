@@ -124,7 +124,7 @@ class _RatePageState extends State<RatePage> {
                                           padding: EdgeInsets.symmetric(
                                               vertical: 16),
                                           child: Text(
-                                            "go_over".tr(),
+                                            "go_over".tr().toUpperCase(),
                                             textAlign: TextAlign.center,
                                             style:
                                                 TextStyle(color: Colors.white),
