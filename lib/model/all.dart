@@ -17,17 +17,23 @@ class All {
 
   All.fromJson(Map<String, dynamic> json) {
     if (json['ism'] != null) {
-      ism = new List<Ism>();
-      json['ism'].forEach((v) {
-        ism.add(Ism.fromJson(v));
-      });
+    ism = new List<Ism>();
+      
+       
+        json['ism'].forEach((v) {
+          if (v['companyid'] == "4") 
+          ism.add(Ism.fromJson(v));
+        });
+      
     }
     if (json['tarifs'] != null) {
-      tarifs = new List<Tarifs>();
-      json['tarifs'].forEach((v) {
-        tarifs.add(new Tarifs.fromJson(v));
-      });
-    }
+        tarifs = new List<Tarifs>();
+        json['tarifs'].forEach((v) {
+            if (v['companyid'] == "4") 
+          tarifs.add(new Tarifs.fromJson(v));
+        });
+      }
+    
   }
 
   Map<String, dynamic> toJson() {

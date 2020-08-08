@@ -30,28 +30,21 @@ class _NewsPageState extends State<NewsPage> {
     bloc.getNews(context.locale.languageCode);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("news".tr().toUpperCase()),
-      ),
-      body: StreamBuilder<RssFeed>(
-          stream: bloc.news,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return WebViewPlus(
-                initialUrl: "https://uztelecom.uz/uz/yangiliklar/yangiliklar",userAgent: "Mozilla/5.0 (Linux; <Android Version>; <Build Tag etc.>) AppleWebKit/<WebKit Rev> (KHTML, like Gecko) Chrome/<Chrome Rev> Mobile Safari/<WebKit Rev>",
-                onWebResourceError: (w) {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text('not_loaded_news'.tr()),
-                  ));
-                },
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('not_loaded_news'.tr()),
-              );
-            } else
-              return Center(child: CircularProgressIndicator());
-          }),
-    );
+        appBar: AppBar(
+          title: Text("news".tr().toUpperCase()),
+        ),
+        body: WebViewPlus(
+          initialUrl: "https://uztelecom.uz/uz/yangiliklar/yangiliklar",
+         onWebResourceError: (w) {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text('not_loaded_news'.tr()),
+            ));
+          },
+          onPageStarted: (url){
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text('loading'.tr()),
+            ));
+          },
+        ));
   }
 }

@@ -33,7 +33,8 @@ dependencies:
   http: 0.12.1
   easy_localization: 2.3.2
   path: ^1.6.4
-  #  path: ^1.7.0
+  flutter_phone_direct_caller: ^1.0.1
+
   webview_flutter_plus: ^0.1.1+9
   html: ^0.14.0+3
   webfeed: ^0.4.2
@@ -46,6 +47,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_rename_app: ^1.0.0
+  flutter_launcher_icons: ^0.7.3
 
 flutter_rename_app:
   application_name: Uzmobile
@@ -53,7 +55,10 @@ flutter_rename_app:
   application_id: uz.uzmobile.helper
   bundle_id: uz.uzmobile.helper
   android_package_name: uz.uzmobile.helper
-
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
 flutter:
 
   uses-material-design: true

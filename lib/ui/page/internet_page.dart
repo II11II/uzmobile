@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
  **/
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:uzmobile/bloc/internet_bloc.dart';
 import 'package:uzmobile/model/all.dart';
 import 'package:uzmobile/ui/widget/balance_button.dart';
@@ -23,10 +24,10 @@ class _InternetPageState extends State<InternetPage> {
       child: Text('paketi'.tr().toUpperCase()),
     ),
     Tab(
-      child: Text('night'.tr().toUpperCase()),
+      child: Text('non-stop'.toUpperCase()),
     ),
     Tab(
-      child: Text('onnet'.toUpperCase()),
+      child: Text('perDay'.tr().toUpperCase()),
     )
   ];
 
@@ -166,9 +167,11 @@ class _InternetPageState extends State<InternetPage> {
                                       title: "buy".tr().toUpperCase(),
                                       onPressed: () async {
                                         String urlString =
-                                            'tel://${data[index].kod}';
+                                            'tel:${data[index].kod+"#"}';
                                         if (await canLaunch(urlString)) {
-                                          await launch(urlString);
+                                          await 
+                                           FlutterPhoneDirectCaller
+                                              .callNumber(urlString);
                                         }
                                       },
                                     )

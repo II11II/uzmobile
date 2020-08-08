@@ -133,7 +133,14 @@ create table ${Ism.tableName} (
     await open();
     List<Map> maps = await db.query(
       Ism.tableName,
-      where: "${IsmEnum.catid.toString().split('.').last}='0'",
+      where: """
+      ${IsmEnum.catid.toString().split('.').last}='15'
+      or
+      ${IsmEnum.catid.toString().split('.').last}='20'
+      or
+      ${IsmEnum.catid.toString().split('.').last}='24' ;
+
+      """,
     );
     await close();
     if (maps.length > 0) {
@@ -142,11 +149,11 @@ create table ${Ism.tableName} (
     return null;
   }
 
-  Future<List<Ism>> getInternetOnnet() async {
+  Future<List<Ism>> getInternetKunlik() async {
     await open();
     List<Map> maps = await db.query(
       Ism.tableName,
-      where: "${IsmEnum.catid.toString().split('.').last}='5'",
+      where: "${IsmEnum.catid.toString().split('.').last}='16'",
     );
     print("onnet : ${maps}");
     await close();
@@ -156,14 +163,10 @@ create table ${Ism.tableName} (
     return null;
   }
 
-  Future<List<Ism>> getInternetNight() async {
+  Future<List<Ism>> getInternetOylik() async {
     await open();
-    List<Map> maps = await db.query(
-      Ism.tableName,
-      where: "${IsmEnum.catid.toString().split('.').last}='4'"
-          ' or '
-          "${IsmEnum.catid.toString().split('.').last}='6'",
-    );
+    List<Map> maps = await db.query(Ism.tableName,
+        where: "${IsmEnum.catid.toString().split('.').last}='17'");
     print("night : ${maps}");
 
     await close();
@@ -177,11 +180,7 @@ create table ${Ism.tableName} (
     await open();
     List<Map> maps = await db.query(
       Ism.tableName,
-      where: "${IsmEnum.catid.toString().split('.').last}='1'"
-          ' or '
-          "${IsmEnum.catid.toString().split('.').last}='2'"
-          ' or '
-          "${IsmEnum.catid.toString().split('.').last}='3'",
+      where: "${IsmEnum.catid.toString().split('.').last}='14'",
     );
     print("paketi : ${maps}");
 

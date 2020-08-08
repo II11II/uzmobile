@@ -16,6 +16,9 @@ class HomeBloc extends BaseBloc {
   Future<String> getData() async {
     try {
       All all = await repo.getAllData;
+      
+      print(all.tarifs.length);
+      print(all.ism.length);
       for (Tarifs i in all.tarifs) {
         print("data : ${i.ord}");
         int tariff = await repo.insertTarifs(i);

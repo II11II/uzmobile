@@ -14,7 +14,7 @@ class Api {
   Api._();
 
   factory Api() => _api;
-  final String _kUrl = "http://umsumednew.yangibozor.uz/api/index.php";
+  final String _kUrl = "http://ussdumed.yangibozor.uz/api/index.php";
 
   Future<All> getAllData() async {
     final response = await http.get(_kUrl);

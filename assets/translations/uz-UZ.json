@@ -22,7 +22,8 @@
   "customer_service": "Yordam xizmati",
   "minute_sms": "Daqiqa/sms",
   "paketi": "Paketlar",
-  "night": "Tungi",
+  "perDay": "Kunlik",
+  "perMonth": "Oylik",
   "refreshed": "Malumotlar yangilandi",
   "more": "Qo'shimcha",
   "go_over": "O'tish",
@@ -32,9 +33,5 @@
   "buy": "Xarid qilish",
   "otherProblem": "Malumotlar yangilanmadi",
   "not_loaded_news": "Yangliklar yuklanmadi\n Birozdan so'ng urinib ko'ring",
-  "national_operator":"Milliy operator"
-
-
-
-
+  "national_operator": "Milliy operator"
 }

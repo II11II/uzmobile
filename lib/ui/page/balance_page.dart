@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
     Created at:
  **/
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:uzmobile/ui/widget/balance_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,39 +31,43 @@ class _BalancePageState extends State<BalancePage> {
               BalanceButton(
                 title: "check_balance".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*100*1#";
-                  if (await canLaunch(urlString)) launch(urlString);
+                  String urlString = "tel:*100*1#";
+                  if (await canLaunch(urlString))
+                    await FlutterPhoneDirectCaller.callNumber(urlString);
                 },
               ),
               BalanceButton(
                 title: "check_internet_minute_sms".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*100*2#";
-                  if (await canLaunch(urlString)) launch(urlString);
+                  String urlString = "tel:*100*2#";
+                  if (await canLaunch(urlString))
+                    await FlutterPhoneDirectCaller.callNumber(urlString);
                 },
               ),
               BalanceButton(
                 title: "check_limit".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*107#";
-                  if (await canLaunch(urlString)) launch(urlString);
+                  String urlString = "tel:*107#";
+                  if (await canLaunch(urlString))
+                    await FlutterPhoneDirectCaller.callNumber(urlString);
                 },
               ),
               BalanceButton(
                 title: "my_number".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*100*4#";
-                  if (await canLaunch(urlString)) launch(urlString);
+                  String urlString = "tel:*100*4#";
+                  if (await canLaunch(urlString))
+                    await FlutterPhoneDirectCaller.callNumber(urlString);
                 },
               ),
               BalanceButton(
                 title: "my_numbers".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*100*5#";
-                  if (await canLaunch(urlString)) launch(urlString);
+                  String urlString = "tel:*100*5#";
+                  if (await canLaunch(urlString))
+                    await FlutterPhoneDirectCaller.callNumber(urlString);
                 },
               ),
-             
             ],
           ),
         ),

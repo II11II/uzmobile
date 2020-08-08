@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:uzmobile/bloc/home_bloc.dart';
 import 'package:uzmobile/ui/page/balance_page.dart';
 import 'package:uzmobile/ui/page/internet_page.dart';
@@ -53,15 +54,33 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                   padding: EdgeInsets.only(top: 20, bottom: 5),
-                  child: Text(
-                    'national_operator'.tr(),
-                    style: TextStyle(fontSize: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(22),
+                          child: Image.asset(
+                            'assets/icon/icon.png',
+                            scale: 20,
+                          )),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'national_operator'.tr(),
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ],
                   )),
               Expanded(
                 child: GridView.count(
                     controller: new ScrollController(keepScrollOffset: false),
                     shrinkWrap: true,
-                    padding: EdgeInsets.symmetric(horizontal: 30,),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
                     crossAxisCount: 2,
                     children: [
                       Column(
@@ -220,14 +239,15 @@ class _HomePageState extends State<HomePage> {
       currentIndex: 1,
       onTap: (index) async {
         if (index == 0) {
-          String codeNumber = 'tel://1099';
+          String codeNumber = 'tel:1099';
           if (await canLaunch(codeNumber)) {
-            launch(codeNumber);
+            await FlutterPhoneDirectCaller.callNumber(codeNumber);
           }
         }
         if (index == 2) {
           String urlString = "https://cabinet.uztelecom.uz/ps/scc/login.php";
-          if (await canLaunch(urlString)) launch(urlString);
+          if (await canLaunch(urlString))
+            await launch(urlString);
         }
       },
       selectedItemColor: Theme.of(context).primaryColor,
@@ -282,7 +302,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () async {
               String telegram = 'https://t.me/USSDMobileUzb';
               if (await canLaunch(telegram)) {
-                launch(telegram);
+                await launch(telegram);
               }
             },
           ),

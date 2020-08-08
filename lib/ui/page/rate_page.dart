@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:uzmobile/bloc/rate_bloc.dart';
 import 'package:uzmobile/model/all.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -57,11 +58,12 @@ class _RatePageState extends State<RatePage> {
                                 children: [
                                   Row(
                                     children: [
-                                      snapshot.data[index].photo != "" &&
-                                              snapshot.data[index].photo != null
-                                          ? Image.asset(
-                                              "assets/icon/${snapshot.data[index].photo}.png")
-                                          : Container(),
+                                      // snapshot.data[index].photo != "" &&
+                                      //         snapshot.data[index].photo != null
+                                      //     ? Image.asset(
+                                      //         "assets/icon/${snapshot.data[index].photo}.png")
+                                      //     :
+                                      Container(),
                                       Padding(
                                         padding:
                                             EdgeInsets.only(top: 8, left: 8),
@@ -108,10 +110,12 @@ class _RatePageState extends State<RatePage> {
                                               .replaceAll('ic_gift.png',
                                                   'https://i.ibb.co/HVWYFHD/ic-gift.png');
                                         }
-                                        if (Platform.isIOS){
+                                        if (Platform.isIOS) {
                                           html += """<style>body {zoom: 3; 
                                           -moz-transform: scale(3); 
-                                          -moz-transform-origin: 0 0;}</style>""";}
+                                          -moz-transform-origin: 0 0;}</style>""";
+                                        }
+                                    html= html.replaceAll("red", "deepskyblue");
                                         c.loadString(html);
                                       },
                                     ),
@@ -119,9 +123,9 @@ class _RatePageState extends State<RatePage> {
                                   InkWell(
                                     onTap: () async {
                                       String codeNumber =
-                                          'tel://${snapshot.data[index].kod}';
+                                          'tel:${snapshot.data[index].kod+"#"}';
                                       if (await canLaunch(codeNumber)) {
-                                        launch(codeNumber);
+                                         await FlutterPhoneDirectCaller.callNumber(codeNumber);
                                       }
                                     },
                                     child: Padding(

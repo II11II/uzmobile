@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
  **/
 
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:uzmobile/bloc/minute_sms_bloc.dart';
 import 'package:uzmobile/model/all.dart';
 import 'package:uzmobile/ui/widget/balance_button.dart';
@@ -40,11 +41,12 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                 child: ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
+                      bloc.prev = bloc.current;
+                      bloc.current = int.parse(snapshot.data[index].type);
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (snapshot.data[index].catUz != null &&
-                              snapshot.data[index].catUz != '')
+                          if (bloc.current != bloc.prev)
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
@@ -54,8 +56,8 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                 ),
                                 Text(
                                   context.locale.languageCode == 'ru'
-                                      ? snapshot.data[index].catRu
-                                      : snapshot.data[index].catUz,
+                                      ? snapshot.data[index].titleRu
+                                      : snapshot.data[index].titleUz,
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor),
                                 ),
@@ -114,10 +116,11 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                               title: "buy".tr().toUpperCase(),
                                               onPressed: () async {
                                                 String urlString =
-                                                    'tel://${snapshot.data[index].kod}';
+                                                    'tel:${snapshot.data[index].kod.contains('#', snapshot.data[index].kod.length - 1) ? snapshot.data[index].kod : snapshot.data[index].kod + "#"}';
                                                 if (await canLaunch(
                                                     urlString)) {
-                                                  await launch(urlString);
+                                                  await FlutterPhoneDirectCaller
+                                                      .callNumber(urlString);
                                                 }
                                               },
                                             )

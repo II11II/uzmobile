@@ -24,8 +24,8 @@ class ServiceBloc extends BaseBloc {
            4G LTE -  70 Mbit/sgacha tezlik. 4G LTE 4G-modulga ega barcha zamonaviy qurilmalarda.
            """,
 
-          codeApply: "tel://*111*2*7*1#",
-          codeDeny: "tel://*111*2*7*2#"),
+          codeApply: "tel:*111*2*7*1#",
+          codeDeny: "tel:*111*2*7*2#"),
       Service(
           titleUz: "«Oila uchun» xizmati",
           titleRu: "Услуга «Для Семьи»",
@@ -45,8 +45,8 @@ Guruh ichida barcha chiquvchi qo‘ng‘iroqlar – 0,00 so‘m
 420 so‘m
 Xizmatni faollashtirish narhi
     """,
-          codeApply: "tel://*111*1*17*1*1#",
-          codeDeny: "tel://*111*1*17*1*2#"),
+          codeApply: "tel:*111*1*17*1*1#",
+          codeDeny: "tel:*111*1*17*1*2#"),
       Service(
           titleUz: "Tezkor o‘tkazmalar",
           titleRu: "Быстрый перевод	",
@@ -63,7 +63,7 @@ Xizmatni faollashtirish narhi
 160 so‘m
 Muvafaqqiyatli pul o‘tkazmasi uchun xizmat narxi USSD orqali pul o‘tkazmalarini amalga oshirish:
 Mablag‘larni UZMOBILE boshqa abonentiga o‘tkazish uchun, pul o‘tkazayotgan abonent quyidagi USSD so‘rovni amalga oshirishi kerak: Misol uchun, 99XXXABCD raqamli abonentga 3000 so‘mga teng mablag‘ yuborish uchun, yuboruvchi abonent quyidagi USSD so‘rovni yuboradi *124*3*99XXXABCD#..	
-""",         codeApply: "tel://*124#",
+""",         codeApply: "tel:*124#",
          ),
       Service(
           titleUz: "Tungi qo’ng’iroqlar",
@@ -84,10 +84,10 @@ Xizmatni faollashtirish narhi
 42 so‘m
 Xizmat abonent to‘lovi, kuniga
         """,
-          codeApply: "tel://*111*1*16*1#",
+          codeApply: "tel:*111*1*16*1#",
          
-          codeDeny: "tel://*111*1*16*2#",
-          codeSet: "tel://*111*1*16*3#"),
+          codeDeny: "tel:*111*1*16*2#",
+          codeSet: "tel:*111*1*16*3#"),
       Service(
         titleUz: "«Qabul qilinmagan qo‘ng‘iroq» va «Tarmoqda»",
         titleRu: "«Пропущенный звонок» и «В сети»",
@@ -100,8 +100,8 @@ Endi UZMOBILE GSM abonentlari “Qabul qilinmagan qo‘ng‘iroq” xizmati orqa
 40 so‘m
 Xizmat abonent to‘lovi, kuniga
       """,
-        codeApply: "tel://*111*2*4*1#",
-        codeDeny: "tel://*111*2*4*2#",
+        codeApply: "tel:*111*2*4*1#",
+        codeDeny: "tel:*111*2*4*2#",
       ),
       Service(
         titleUz: "Chaqiriqni kutish va ushlabturish",
@@ -112,8 +112,8 @@ Xizmat abonent to‘lovi, kuniga
         descrUz: """
 Suhbat mobaynida javob berish jarayonida boshqa abonent kirish qo‘ng‘iroqlari (yoki qo‘ng‘iroq qilgan boshqaabonent) Chaqiriqni kutish rejimi imkonini beradi va kirish chaqiriqlarini mazkur joriy suhbat tugagunigaqada rushlabturadi, ya’ninavbatma-navba tikki abonеnt bilan suhbatlashadi.
     """,
-        codeApply: "tel://*43#",
-        codeDeny: "tel://*43#",
+        codeApply: "tel:*43#",
+        codeDeny: "tel:*43#",
       ),Service(
         titleUz: "Chaqiriqni boshqa manzilga yo‘llash",
         titleRu: "Переадресация вызова",
@@ -123,9 +123,9 @@ Suhbat mobaynida javob berish jarayonida boshqa abonent kirish qo‘ng‘iroqlar
         descrUz: """
 Mobil telefoningizga kiruvchichaqiriqlar siz ko‘rsatgan shahar (shaharlararo va Xalqaro raqamlarga shunga muvofiq orqali kod orqali o‘tkazilishi mumkin) yoki mobil raqamiga o‘tkazish Imkonini beradi.
  """,
-        codeApply: "tel://**21*99899999999#",
-        codeDeny: "tel://##21#",
-        codeSet: "tel://*#21#",
+        codeApply: "tel:**21*99899999999#",
+        codeDeny: "tel:##21#",
+        codeSet: "tel:*#21#",
       ),
     ]);
   }
