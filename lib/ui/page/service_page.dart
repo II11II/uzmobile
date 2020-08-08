@@ -6,8 +6,8 @@ import 'package:flutter/cupertino.dart';
  **/
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mobiuz/bloc/service_bloc.dart';
-import 'package:mobiuz/model/service.dart';
+import 'package:uzmobile/bloc/service_bloc.dart';
+import 'package:uzmobile/model/service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ServicePage extends StatefulWidget {

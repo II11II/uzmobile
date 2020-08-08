@@ -7,13 +7,13 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobiuz/bloc/home_bloc.dart';
-import 'package:mobiuz/ui/page/balance_page.dart';
-import 'package:mobiuz/ui/page/internet_page.dart';
-import 'package:mobiuz/ui/page/minute_sms_page.dart';
-import 'package:mobiuz/ui/page/news_page.dart';
-import 'package:mobiuz/ui/page/rate_page.dart';
-import 'package:mobiuz/ui/page/service_page.dart';
+import 'package:uzmobile/bloc/home_bloc.dart';
+import 'package:uzmobile/ui/page/balance_page.dart';
+import 'package:uzmobile/ui/page/internet_page.dart';
+import 'package:uzmobile/ui/page/minute_sms_page.dart';
+import 'package:uzmobile/ui/page/news_page.dart';
+import 'package:uzmobile/ui/page/rate_page.dart';
+import 'package:uzmobile/ui/page/service_page.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -42,141 +42,165 @@ class _HomePageState extends State<HomePage> {
         key: _scaffoldKey,
         drawer: drawer(),
         bottomNavigationBar: bottomNavigationBar(),
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          title: Text('mobiuz'.tr()),
+          title: Text('uzmobile'.tr()),
         ),
-        body: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-                padding: EdgeInsets.only(top: 30),
-                child: Text(
-                  'mobiuz'.tr(),
-                  style: TextStyle(fontSize: 16),
-                )),
-            Flexible(
-              child: GridView(
-                  padding: EdgeInsets.all(30),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                  padding: EdgeInsets.only(top: 20, bottom: 5),
+                  child: Text(
+                    'national_operator'.tr(),
+                    style: TextStyle(fontSize: 16),
+                  )),
+              Expanded(
+                child: GridView.count(
+                    controller: new ScrollController(keepScrollOffset: false),
+                    shrinkWrap: true,
+                    padding: EdgeInsets.symmetric(horizontal: 30,),
                     crossAxisCount: 2,
-                  ),
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        FlatButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (BuildContext context) =>
-                                      BalancePage())),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            elevation: 3,
-                            child: Image.asset(
-                              'assets/icon/balans.png',
-                              fit: BoxFit.cover,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FlatButton(
+                            onPressed: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (BuildContext context) =>
+                                        BalancePage())),
+                            child: Card(
+                              color: Colors.lightBlueAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 3,
+                              child: Image.asset(
+                                'assets/icon/balans.png',
+                                color: Colors.white,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Text('balance'.tr().toUpperCase())
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        FlatButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (BuildContext context) =>
-                                      InternetPage())),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            elevation: 3,
-                            child: Image.asset('assets/icon/internet.png'),
+                          Text('balance'.tr().toUpperCase())
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          FlatButton(
+                            onPressed: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (BuildContext context) =>
+                                        InternetPage())),
+                            child: Card(
+                              color: Colors.lightBlueAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 3,
+                              child: Image.asset(
+                                'assets/icon/internet.png',
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                        Text('internet'.tr().toUpperCase())
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        FlatButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => RatePage())),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            elevation: 3,
-                            child: Image.asset('assets/icon/tarifi.png'),
+                          Text('internet'.tr().toUpperCase())
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          FlatButton(
+                            onPressed: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => RatePage())),
+                            child: Card(
+                              color: Colors.lightBlueAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 3,
+                              child: Image.asset(
+                                'assets/icon/tarifi.png',
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                        Text('rates'.tr().toUpperCase())
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        FlatButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (BuildContext context) =>
-                                      ServicePage())),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            elevation: 3,
-                            child: Image.asset('assets/icon/uslugi.png'),
+                          Text('rates'.tr().toUpperCase())
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          FlatButton(
+                            onPressed: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ServicePage())),
+                            child: Card(
+                              color: Colors.lightBlueAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 3,
+                              child: Image.asset(
+                                'assets/icon/uslugi.png',
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                        Text('services'.tr().toUpperCase())
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        FlatButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (BuildContext context) =>
-                                      MinuteSmsPage())),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            elevation: 3,
-                            child: Image.asset('assets/icon/minuti.png'),
+                          Text('services'.tr().toUpperCase())
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          FlatButton(
+                            onPressed: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (BuildContext context) =>
+                                        MinuteSmsPage())),
+                            child: Card(
+                              color: Colors.lightBlueAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 3,
+                              child: Image.asset(
+                                'assets/icon/minuti.png',
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                        Text('minute_sms'.tr().toUpperCase())
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        FlatButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (BuildContext context) =>
-                                      NewsPage())),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            elevation: 3,
-                            child: Image.asset('assets/icon/news.png'),
+                          Text('minute_sms'.tr().toUpperCase())
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          FlatButton(
+                            onPressed: () => Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (BuildContext context) =>
+                                        NewsPage())),
+                            child: Card(
+                              color: Colors.lightBlueAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 3,
+                              child: Image.asset(
+                                'assets/icon/news.png',
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                        Text('news'.tr().toUpperCase())
-                      ],
-                    ),
-                  ]),
-            ),
-          ],
+                          Text('news'.tr().toUpperCase())
+                        ],
+                      ),
+                    ]),
+              ),
+            ],
+          ),
         ));
   }
 
@@ -196,13 +220,13 @@ class _HomePageState extends State<HomePage> {
       currentIndex: 1,
       onTap: (index) async {
         if (index == 0) {
-          String codeNumber = 'tel://+998971300909';
+          String codeNumber = 'tel://1099';
           if (await canLaunch(codeNumber)) {
             launch(codeNumber);
           }
         }
         if (index == 2) {
-          String urlString = "https://ip.mobi.uz/selfcare";
+          String urlString = "https://cabinet.uztelecom.uz/ps/scc/login.php";
           if (await canLaunch(urlString)) launch(urlString);
         }
       },
@@ -256,7 +280,7 @@ class _HomePageState extends State<HomePage> {
             leading: Icon(Icons.send),
             title: Text('telegram_channel'.tr()),
             onTap: () async {
-              String telegram = 'https://t.me/umsnew';
+              String telegram = 'https://t.me/USSDMobileUzb';
               if (await canLaunch(telegram)) {
                 launch(telegram);
               }

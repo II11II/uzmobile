@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mobiuz/bloc/base/base_bloc.dart';
-import 'package:mobiuz/model/all.dart';
+import 'package:uzmobile/bloc/base/base_bloc.dart';
+import 'package:uzmobile/model/all.dart';
 import 'package:rxdart/rxdart.dart';
 
 /**

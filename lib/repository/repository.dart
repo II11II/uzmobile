@@ -2,9 +2,9 @@
 @Authour: Islomkuja Akhrorov
 Created at: 7/13/20
 */
-import 'package:mobiuz/data/api.dart';
-import 'package:mobiuz/data/database.dart';
-import 'package:mobiuz/model/all.dart';
+import 'package:uzmobile/data/api.dart';
+import 'package:uzmobile/data/database.dart';
+import 'package:uzmobile/model/all.dart';
 
 class Repository {
   static final Repository _repository = Repository._();

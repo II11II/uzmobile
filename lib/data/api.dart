@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:mobiuz/model/all.dart';
+import 'package:uzmobile/model/all.dart';
 
 class Api {
   static final Api _api = Api._();

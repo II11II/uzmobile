@@ -5,7 +5,7 @@ Created at: 7/13/20
 
 import 'dart:io';
 
-import 'package:mobiuz/model/all.dart';
+import 'package:uzmobile/model/all.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'base/base_bloc.dart';

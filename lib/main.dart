@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      title: 'mobiuz'.tr(),
+      title: 'uzmobile'.tr(),
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        primaryColor: Colors.red,
+        primarySwatch: Colors.blue,
+        primaryColor: Colors.blue,
         textTheme: TextTheme(
             bodyText2: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
         visualDensity: VisualDensity.adaptivePlatformDensity,

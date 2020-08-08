@@ -2,7 +2,7 @@
     @Author: Islomkhuja Akhrorov
     Created at:
  **/
-import 'package:mobiuz/model/all.dart';
+import 'package:uzmobile/model/all.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -43,7 +43,7 @@ class DatabaseProvider {
   Future open() async {
     print(TarifsEnum.id.toString());
     var databasesPath = await getDatabasesPath();
-    String path = join(databasesPath, 'mobiuz.db');
+    String path = join(databasesPath, 'uzmobile.db');
     db = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute('''

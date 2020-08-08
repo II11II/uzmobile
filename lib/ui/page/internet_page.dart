@@ -6,9 +6,9 @@ import 'package:flutter/cupertino.dart';
  **/
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:mobiuz/bloc/internet_bloc.dart';
-import 'package:mobiuz/model/all.dart';
-import 'package:mobiuz/ui/widget/balance_button.dart';
+import 'package:uzmobile/bloc/internet_bloc.dart';
+import 'package:uzmobile/model/all.dart';
+import 'package:uzmobile/ui/widget/balance_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InternetPage extends StatefulWidget {

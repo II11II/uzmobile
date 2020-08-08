@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
     Created at:
  **/
 import 'package:flutter/material.dart';
-import 'package:mobiuz/ui/widget/balance_button.dart';
+import 'package:uzmobile/ui/widget/balance_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BalancePage extends StatefulWidget {
@@ -30,66 +30,39 @@ class _BalancePageState extends State<BalancePage> {
               BalanceButton(
                 title: "check_balance".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*100#";
+                  String urlString = "tel://*100*1#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "check_internet_paket".tr().toUpperCase(),
+                title: "check_internet_minute_sms".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*102#";
+                  String urlString = "tel://*100*2#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "check_sms_left".tr().toUpperCase(),
+                title: "check_limit".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*104#";
-                  if (await canLaunch(urlString)) launch(urlString);
-                },
-              ),
-              BalanceButton(
-                title: "check_minute_left".tr().toUpperCase(),
-                onPressed: () async {
-                  String urlString = "tel://*103#";
-                  if (await canLaunch(urlString)) launch(urlString);
-                },
-              ),
-              BalanceButton(
-                title: "my_expenses".tr().toUpperCase(),
-                onPressed: () async {
-                  String urlString = "tel://*111*025#";
-                  if (await canLaunch(urlString)) launch(urlString);
-                },
-              ),
-              BalanceButton(
-                title: "prohibit_distribution".tr().toUpperCase(),
-                onPressed: () async {
-                  String urlString = "tel://*111*0271#";
-                  if (await canLaunch(urlString)) launch(urlString);
-                },
-              ),
-              BalanceButton(
-                title: "inline_services".tr().toUpperCase(),
-                onPressed: () async {
-                  String urlString = "tel://*140#";
+                  String urlString = "tel://*107#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
                 title: "my_number".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*150#";
+                  String urlString = "tel://*100*4#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
               BalanceButton(
-                title: "all_my_numbers".tr().toUpperCase(),
+                title: "my_numbers".tr().toUpperCase(),
                 onPressed: () async {
-                  String urlString = "tel://*151#";
+                  String urlString = "tel://*100*5#";
                   if (await canLaunch(urlString)) launch(urlString);
                 },
               ),
+             
             ],
           ),
         ),

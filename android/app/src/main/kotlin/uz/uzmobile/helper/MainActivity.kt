@@ -1,4 +1,4 @@
-package uz.app.mobiuz
+package uz.uzmobile.helper
 
 import io.flutter.embedding.android.FlutterActivity
 

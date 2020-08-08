@@ -1,4 +1,4 @@
-import 'package:mobiuz/bloc/base/base_bloc.dart';
+import 'package:uzmobile/bloc/base/base_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 

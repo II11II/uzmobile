@@ -1,3 +1,5 @@
+import 'dart:io';
+
 /**
     @Author: Islomkhuja Akhrorov
     Created at:
@@ -5,8 +7,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobiuz/bloc/rate_bloc.dart';
-import 'package:mobiuz/model/all.dart';
+import 'package:uzmobile/bloc/rate_bloc.dart';
+import 'package:uzmobile/model/all.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
@@ -78,8 +80,12 @@ class _RatePageState extends State<RatePage> {
                                     child: WebViewPlus(
                                       javascriptMode: JavascriptMode.disabled,
                                       debuggingEnabled: false,
+                                      userAgent: 'Safari iOS 5.1 - iPhone',
                                       onWebViewCreated: (c) {
+                                        print(snapshot.data[index].descrRu);
+
                                         String html;
+
                                         if (context.locale.languageCode ==
                                             'ru') {
                                           html = snapshot.data[index].descrRu
@@ -102,7 +108,10 @@ class _RatePageState extends State<RatePage> {
                                               .replaceAll('ic_gift.png',
                                                   'https://i.ibb.co/HVWYFHD/ic-gift.png');
                                         }
-                                        print(html);
+                                        if (Platform.isIOS){
+                                          html += """<style>body {zoom: 3; 
+                                          -moz-transform: scale(3); 
+                                          -moz-transform-origin: 0 0;}</style>""";}
                                         c.loadString(html);
                                       },
                                     ),
