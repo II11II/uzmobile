@@ -1,4 +1,4 @@
-# mobiuz
+# Uzmobile
 
 A new Flutter application.
 
