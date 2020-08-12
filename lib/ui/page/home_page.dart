@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:uzmobile/bloc/home_bloc.dart';
 import 'package:uzmobile/ui/page/balance_page.dart';
 import 'package:uzmobile/ui/page/internet_page.dart';
@@ -37,6 +38,29 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  rateApp() {
+    LaunchReview.launch(
+        androidAppId: 'uz.uzmobile.helper',
+        iOSAppId: '', // Todo:
+        writeReview: false);
+  }
+
+  share() async {
+    if (Platform.isIOS)
+      await Share.share(''); // TODO : APP Store link
+    else {
+      await Share.share(
+          'https://play.google.com/store/apps/details?id=uz.uzmobile.helper');
+    }
+  }
+
+  telegramLaunch() async {
+    String telegram = 'https://t.me/USSDMobileUzb';
+    if (await canLaunch(telegram)) {
+      await launch(telegram);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +70,19 @@ class _HomePageState extends State<HomePage> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Text('uzmobile'.tr()),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.send),
+              onPressed: telegramLaunch,
+            ), IconButton(
+              icon: Icon(Icons.favorite),
+              onPressed: rateApp,
+            ),
+            IconButton(
+              icon: Icon(Icons.share),
+              onPressed: share,
+            ),
+          ],
         ),
         body: Center(
           child: Column(
@@ -246,8 +283,7 @@ class _HomePageState extends State<HomePage> {
         }
         if (index == 2) {
           String urlString = "https://cabinet.uztelecom.uz/ps/scc/login.php";
-          if (await canLaunch(urlString))
-            await launch(urlString);
+          if (await canLaunch(urlString)) await launch(urlString);
         }
       },
       selectedItemColor: Theme.of(context).primaryColor,
@@ -288,28 +324,17 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             leading: Icon(Icons.share),
             title: Text('share'.tr()),
-            onTap: () {
-              if (Platform.isIOS)
-                Share.share(''); // TODO : APP Store link
-              else {
-                Share.share('');
-              }
-            },
+            onTap: share,
           ),
           ListTile(
             leading: Icon(Icons.send),
             title: Text('telegram_channel'.tr()),
-            onTap: () async {
-              String telegram = 'https://t.me/USSDMobileUzb';
-              if (await canLaunch(telegram)) {
-                await launch(telegram);
-              }
-            },
+            onTap: telegramLaunch,
           ),
           ListTile(
             leading: Icon(Icons.favorite),
             title: Text('rate_app'.tr()),
-            onTap: () {},
+            onTap: rateApp,
           ),
         ],
       ),

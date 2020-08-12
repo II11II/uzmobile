@@ -41,12 +41,10 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                 child: ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      bloc.prev = bloc.current;
-                      bloc.current = int.parse(snapshot.data[index].type);
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (bloc.current != bloc.prev)
+                           if (snapshot.data[index].catUz != null && snapshot.data[index].catUz != '')
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
@@ -56,8 +54,8 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                 ),
                                 Text(
                                   context.locale.languageCode == 'ru'
-                                      ? snapshot.data[index].titleRu
-                                      : snapshot.data[index].titleUz,
+                                      ? snapshot.data[index].catRu
+                                      : snapshot.data[index].catUz,
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor),
                                 ),

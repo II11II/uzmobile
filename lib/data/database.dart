@@ -134,8 +134,6 @@ create table ${Ism.tableName} (
     List<Map> maps = await db.query(
       Ism.tableName,
       where: """
-      ${IsmEnum.catid.toString().split('.').last}='15'
-      or
       ${IsmEnum.catid.toString().split('.').last}='20'
       or
       ${IsmEnum.catid.toString().split('.').last}='24' ;
@@ -181,6 +179,20 @@ create table ${Ism.tableName} (
     List<Map> maps = await db.query(
       Ism.tableName,
       where: "${IsmEnum.catid.toString().split('.').last}='14'",
+    );
+    print("paketi : ${maps}");
+
+    await close();
+    if (maps.length > 0) {
+      return maps.map((e) => Ism.fromJson(e)).toList();
+    }
+    return null;
+  }
+  Future<List<Ism>> getInternetNight() async {
+    await open();
+    List<Map> maps = await db.query(
+      Ism.tableName,
+      where: "${IsmEnum.catid.toString().split('.').last}='15'",
     );
     print("paketi : ${maps}");
 

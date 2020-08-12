@@ -24,11 +24,13 @@ class _InternetPageState extends State<InternetPage> {
       child: Text('paketi'.tr().toUpperCase()),
     ),
     Tab(
-      child: Text('non-stop'.toUpperCase()),
+      child: Text('night'.tr().toUpperCase()),
     ),
     Tab(
       child: Text('perDay'.tr().toUpperCase()),
-    )
+    ), Tab(
+      child: Text('non-stop'.toUpperCase()),
+    ),
   ];
 
   @override
@@ -40,7 +42,7 @@ class _InternetPageState extends State<InternetPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: Text("internet".tr().toUpperCase()),
@@ -49,7 +51,7 @@ class _InternetPageState extends State<InternetPage> {
           children: [
             Container(
               constraints: BoxConstraints.expand(height: 50),
-              child: TabBar(
+              child: TabBar(isScrollable: true,
                 labelColor: Colors.black,
                 tabs: kTabs,
               ),
@@ -77,11 +79,20 @@ class _InternetPageState extends State<InternetPage> {
                             return Container();
                         }),
                     StreamBuilder<Object>(
-                        stream: bloc.onnet,
+                        stream: bloc.kunlik,
                         builder: (context, snapshot) {
                           if (snapshot.hasData)
                             return customTab(
-                                snapshot.data, bloc.showButtonsOnnet);
+                                snapshot.data, bloc.showButtonsKunlik);
+                          else
+                            return Container();
+                        }),
+                         StreamBuilder<Object>(
+                        stream: bloc.oylik,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData)
+                            return customTab(
+                                snapshot.data, bloc.showButtonsOylik);
                           else
                             return Container();
                         }),

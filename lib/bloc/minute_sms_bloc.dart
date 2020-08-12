@@ -10,8 +10,7 @@ import 'package:rxdart/rxdart.dart';
 class MinuteSmsBloc extends BaseBloc {
   final _all = PublishSubject<List>();
   final _minuteSms = PublishSubject<List<Ism>>();
-int prev;
-  int current;
+
   Stream<List> get all => _all.stream;
 
   Stream<List> get minuteSms => _minuteSms.stream;

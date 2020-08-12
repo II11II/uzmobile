@@ -25,9 +25,10 @@ class Repository {
 
   Future<List<Ism>> get getMinuteSms => _db.getMinuteSms();
 
-  Future<List<Ism>> get getInternetNight => _db.getInternetOylik();
+  Future<List<Ism>> get getInternetOylik => _db.getInternetOylik();
 
-  Future<List<Ism>> get getInternetOnnet => _db.getInternetKunlik();
+  Future<List<Ism>> get getInternetKunlik => _db.getInternetKunlik();
+  Future<List<Ism>> get getInternetNight => _db.getInternetNight();
 
   Future<List<Ism>> get getInternetPaketi => _db.getInternetPaketi();
 
