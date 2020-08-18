@@ -9,17 +9,19 @@ import 'package:rxdart/rxdart.dart';
 
 class InternetBloc extends BaseBloc {
   final _paketi = BehaviorSubject<List<Ism>>();
-  Stream<List> get paketi => _paketi.stream;
+  Stream<List<Ism>> get paketi => _paketi.stream;
 
   final _night = BehaviorSubject<List<Ism>>();
-  Stream<List> get night => _night.stream;
+  Stream<List<Ism>> get night => _night.stream;
 
   final _kunlik= BehaviorSubject<List<Ism>>();
 
-  Stream<List> get kunlik => _kunlik.stream;
+  Stream<List<Ism>> get kunlik => _kunlik.stream;
 
   final _oylik = BehaviorSubject<List<Ism>>();
-  Stream<List> get oylik => _oylik.stream;
+  Stream<List<Ism>> get oylik => _oylik.stream;
+  final _tabs = BehaviorSubject<List<Category>>();
+  Stream<List<Category>> get tabs => _tabs.stream;
 
   List<ValueNotifier> showButtonsKunlik;
   List<ValueNotifier> showButtonsOylik;
@@ -27,6 +29,8 @@ class InternetBloc extends BaseBloc {
   List<ValueNotifier> showButtonsNight;
 
   Future getInternet() async {
+    List<Category> tabs = await repo.getInternetTab;
+
     List<Ism> oylik = await repo.getInternetOylik;
     List<Ism> kunlik = await repo.getInternetKunlik;
     List<Ism> paketi = await repo.getInternetPaketi;
@@ -45,10 +49,12 @@ class InternetBloc extends BaseBloc {
     _night.sink.add(night);
     _kunlik.sink.add(kunlik);
     _oylik.sink.add(oylik);
+    _tabs.sink.add(tabs);
   }
 
   @override
   void dispose() {
+    _tabs.close();
     _paketi.close();
     _oylik.close();
     _night.close();

@@ -8,19 +8,23 @@ import 'package:uzmobile/model/all.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MinuteSmsBloc extends BaseBloc {
-  final _all = PublishSubject<List>();
-  final _minuteSms = PublishSubject<List<Ism>>();
+  String prev,curr;int i=-1;
+  final _minuteSms = PublishSubject<All>();
 
-  Stream<List> get all => _all.stream;
-
-  Stream<List> get minuteSms => _minuteSms.stream;
+  Stream<All> get minuteSms => _minuteSms.stream;
 
   List<ValueNotifier> showButtons;
 
   Future getMinuteSms() async {
     List<Ism> minuteSms = await repo.getMinuteSms;
-    
-    _minuteSms.sink.add(minuteSms);
+    List<Category> category = await repo.getMinuteSmsCategory;
+      All all=All();
+       category.add(category[0]);
+       category.removeAt(0);
+      all.category=category;
+
+      all.ism=minuteSms;
+    _minuteSms.sink.add(all);
 
     showButtons =
         List.generate(minuteSms.length, (index) => ValueNotifier<bool>(false));

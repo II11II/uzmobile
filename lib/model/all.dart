@@ -8,32 +8,35 @@ class Table {
   Map<String, dynamic> toJson() {}
   Table.fromJson(Map<String, dynamic> map);
 }
-
 class All {
   List<Ism> ism;
   List<Tarifs> tarifs;
+  List<Category> category;
 
-  All({this.ism, this.tarifs});
+  All({this.ism, this.tarifs, this.category});
 
   All.fromJson(Map<String, dynamic> json) {
     if (json['ism'] != null) {
-    ism = new List<Ism>();
-      
-       
-        json['ism'].forEach((v) {
-          if (v['companyid'] == "4") 
-          ism.add(Ism.fromJson(v));
-        });
-      
+      ism = new List<Ism>();
+      json['ism'].forEach((v) {
+        if (v['companyid'] == "4")
+          ism.add(new Ism.fromJson(v));
+      });
     }
     if (json['tarifs'] != null) {
-        tarifs = new List<Tarifs>();
-        json['tarifs'].forEach((v) {
-            if (v['companyid'] == "4") 
+      tarifs = new List<Tarifs>();
+      json['tarifs'].forEach((v) {
+        if (v['companyid'] == "4")
           tarifs.add(new Tarifs.fromJson(v));
-        });
-      }
-    
+      });
+    }
+    if (json['category'] != null) {
+      category = new List<Category>();
+      json['category'].forEach((v) {
+        if (v['companyid'] == "4")
+          category.add(new Category.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -43,6 +46,9 @@ class All {
     }
     if (this.tarifs != null) {
       data['tarifs'] = this.tarifs.map((v) => v.toJson()).toList();
+    }
+    if (this.category != null) {
+      data['category'] = this.category.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -58,23 +64,21 @@ class Ism {
   String type;
   String descUz;
   String descRu;
-  String catUz;
-  String catRu;
   String status;
+
 
   Ism(
       {this.id,
-      this.price,
-      this.titleUz,
-      this.titleRu,
-      this.kod,
-      this.catid,
-      this.type,
-      this.descUz,
-      this.descRu,
-      this.catUz,
-      this.catRu,
-      this.status});
+        this.price,
+        this.titleUz,
+        this.titleRu,
+        this.kod,
+        this.catid,
+        this.type,
+        this.descUz,
+        this.descRu,
+        this.status,
+        });
 
   Ism.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString();
@@ -86,9 +90,8 @@ class Ism {
     type = json['type'];
     descUz = json['desc_uz'];
     descRu = json['desc_ru'];
-    catUz = json['cat_uz'];
-    catRu = json['cat_ru'];
     status = json['status'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -102,12 +105,10 @@ class Ism {
     data['type'] = this.type;
     data['desc_uz'] = this.descUz;
     data['desc_ru'] = this.descRu;
-    data['cat_uz'] = this.catUz;
-    data['cat_ru'] = this.catRu;
     data['status'] = this.status;
+
     return data;
   }
-
   static String tableName = "Ism";
 }
 
@@ -120,18 +121,24 @@ class Tarifs {
   String photo;
   String descrUz;
   String descrRu;
-  String ord;
+  String summa;
+  String status;
+  String torder;
+
 
   Tarifs(
       {this.id,
-      this.name,
-      this.titleUz,
-      this.titleRu,
-      this.kod,
-      this.photo,
-      this.descrUz,
-      this.descrRu,
-      this.ord});
+        this.name,
+        this.titleUz,
+        this.titleRu,
+        this.kod,
+        this.photo,
+        this.descrUz,
+        this.descrRu,
+        this.summa,
+        this.status,
+        this.torder,
+        });
 
   Tarifs.fromJson(Map<String, dynamic> json) {
     id = json['id'].toString();
@@ -142,7 +149,10 @@ class Tarifs {
     photo = json['photo'];
     descrUz = json['descr_uz'];
     descrRu = json['descr_ru'];
-    ord = json['ord'];
+    summa = json['summa'];
+    status = json['status'];
+    torder = json['order'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -155,9 +165,52 @@ class Tarifs {
     data['photo'] = this.photo;
     data['descr_uz'] = this.descrUz;
     data['descr_ru'] = this.descrRu;
-    data['ord'] = this.ord;
+    data['summa'] = this.summa;
+    data['status'] = this.status;
+    data['torder'] = this.torder;
+
     return data;
   }
-
   static String tableName = "Tarifs";
+}
+
+class Category {
+  String id;
+  String catUz;
+  String catRu;
+  String kod;
+  String torder;
+  String type;
+
+  Category(
+      {this.id,
+        this.catUz,
+        this.catRu,
+        this.kod,
+        this.torder,
+
+        this.type});
+
+  Category.fromJson(Map<String, dynamic> json) {
+    id = json['id'].toString();
+    catUz = json['cat_uz'];
+    catRu = json['cat_ru'];
+    kod = json['kod'];
+    torder = json['torder'];
+
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['cat_uz'] = this.catUz;
+    data['cat_ru'] = this.catRu;
+    data['kod'] = this.kod;
+    data['torder'] = this.torder;
+    data['type'] = this.type;
+    return data;
+  }
+  static String tableName = "Category";
+
 }

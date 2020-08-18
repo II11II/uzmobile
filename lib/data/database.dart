@@ -15,7 +15,9 @@ enum TarifsEnum {
   photo,
   descr_uz,
   descr_ru,
-  ord
+  summa,
+  status,
+  torder
 }
 enum IsmEnum {
   id,
@@ -27,10 +29,9 @@ enum IsmEnum {
   type,
   desc_uz,
   desc_ru,
-  cat_uz,
-  cat_ru,
   status
 }
+enum CategoryEnum { id, cat_uz, cat_ru, kod, torder, type }
 
 class DatabaseProvider {
   static final DatabaseProvider _db = DatabaseProvider._();
@@ -48,15 +49,17 @@ class DatabaseProvider {
         onCreate: (Database db, int version) async {
       await db.execute('''
 CREATE TABLE ${Tarifs.tableName} ( 
-  ${TarifsEnum.id.toString().split('.').last} INTEGER PRIMARY KEY AUTOINCREMENT, 
-  ${TarifsEnum.name.toString().split('.').last} text,
-  ${TarifsEnum.title_uz.toString().split('.').last} text,
-  ${TarifsEnum.title_ru.toString().split('.').last} text,
-  ${TarifsEnum.kod.toString().split('.').last} text,
-  ${TarifsEnum.photo.toString().split('.').last} text,
-  ${TarifsEnum.descr_uz.toString().split('.').last} text,
-  ${TarifsEnum.descr_ru.toString().split('.').last} text,
-  ${TarifsEnum.ord.toString().split('.').last} text )
+  ${TarifsEnum.id.toString().split('.').last} INTEGER PRIMARY KEY AUTOINCREMENT , 
+  ${TarifsEnum.name.toString().split('.').last} text ,
+  ${TarifsEnum.title_uz.toString().split('.').last} text ,
+  ${TarifsEnum.title_ru.toString().split('.').last} text ,
+  ${TarifsEnum.kod.toString().split('.').last} text ,
+  ${TarifsEnum.photo.toString().split('.').last} text ,
+  ${TarifsEnum.descr_uz.toString().split('.').last} text ,
+  ${TarifsEnum.descr_ru.toString().split('.').last} text ,
+  ${TarifsEnum.status.toString().split('.').last} text ,
+  ${TarifsEnum.torder.toString().split('.').last} text ,
+  ${TarifsEnum.summa.toString().split('.').last} text )
 ''');
       await db.execute('''
 create table ${Ism.tableName} ( 
@@ -69,9 +72,16 @@ create table ${Ism.tableName} (
   ${IsmEnum.type.toString().split('.').last} text ,
   ${IsmEnum.desc_uz.toString().split('.').last} text ,
   ${IsmEnum.desc_ru.toString().split('.').last} text ,
-  ${IsmEnum.cat_uz.toString().split('.').last} text ,
-  ${IsmEnum.cat_ru.toString().split('.').last} text ,
   ${IsmEnum.status.toString().split('.').last} text )
+''');
+      await db.execute('''
+create table ${Category.tableName} ( 
+  ${CategoryEnum.id.toString().split('.').last} integer primary key autoincrement, 
+  ${CategoryEnum.cat_uz.toString().split('.').last} text ,
+  ${CategoryEnum.cat_ru.toString().split('.').last} text ,
+  ${CategoryEnum.kod.toString().split('.').last} text ,
+  ${CategoryEnum.torder.toString().split('.').last} text ,
+  ${CategoryEnum.type.toString().split('.').last} text  )
 ''');
     });
   }
@@ -86,6 +96,20 @@ create table ${Ism.tableName} (
     } on DatabaseException catch (e) {
       print(e);
       updateIsm(table);
+      return 100;
+    }
+  }
+
+  Future<int> insertCategory(Category table) async {
+    await open();
+    try {
+      int result = await db.insert(Category.tableName, table.toJson(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      await close();
+      return result;
+    } on DatabaseException catch (e) {
+      print(e);
+      updateCategory(table);
       return 100;
     }
   }
@@ -129,6 +153,18 @@ create table ${Ism.tableName} (
     return null;
   }
 
+  Future<List<Category>> getCategory() async {
+    await open();
+    List<Map> maps = await db.query(
+      Category.tableName,
+    );
+    await close();
+    if (maps.length > 0) {
+      return maps.map((e) => Category.fromJson(e)).toList();
+    }
+    return null;
+  }
+
   Future<List<Ism>> getMinuteSms() async {
     await open();
     List<Map> maps = await db.query(
@@ -136,13 +172,33 @@ create table ${Ism.tableName} (
       where: """
       ${IsmEnum.catid.toString().split('.').last}='20'
       or
-      ${IsmEnum.catid.toString().split('.').last}='24' ;
+      ${IsmEnum.catid.toString().split('.').last}='24'
+      or
+      ${IsmEnum.catid.toString().split('.').last}='26' ;
 
       """,
     );
     await close();
     if (maps.length > 0) {
       return maps.map((e) => Ism.fromJson(e)).toList();
+    }
+    return null;
+  }
+
+  Future<List<Category>> getMinuteSmsCategory() async {
+    await open();
+    List<Map> maps = await db.query(
+      Category.tableName,
+      where: """
+      ${CategoryEnum.type.toString().split('.').last}='1'
+      or
+      ${CategoryEnum.type.toString().split('.').last}='2' ;
+
+      """,
+    );
+    await close();
+    if (maps.length > 0) {
+      return maps.map((e) => Category.fromJson(e)).toList();
     }
     return null;
   }
@@ -157,6 +213,20 @@ create table ${Ism.tableName} (
     await close();
     if (maps.length > 0) {
       return maps.map((e) => Ism.fromJson(e)).toList();
+    }
+    return null;
+  }
+
+  Future<List<Category>> getInternetTab() async {
+    await open();
+    List<Map> maps = await db.query(
+      Category.tableName,
+      where: "${CategoryEnum.type.toString().split('.').last}='0'",
+    );
+    print("onnet : ${maps}");
+    await close();
+    if (maps.length > 0) {
+      return maps.map((e) => Category.fromJson(e)).toList();
     }
     return null;
   }
@@ -188,6 +258,7 @@ create table ${Ism.tableName} (
     }
     return null;
   }
+
   Future<List<Ism>> getInternetNight() async {
     await open();
     List<Map> maps = await db.query(
@@ -217,6 +288,16 @@ create table ${Ism.tableName} (
     await open();
     int result = await db.update(
       Tarifs.tableName,
+      table.toJson(),
+    );
+    await close();
+    return result;
+  }
+
+  Future<int> updateCategory(Category table) async {
+    await open();
+    int result = await db.update(
+      Category.tableName,
       table.toJson(),
     );
     await close();

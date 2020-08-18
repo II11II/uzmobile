@@ -20,7 +20,7 @@ class HomeBloc extends BaseBloc {
       print(all.tarifs.length);
       print(all.ism.length);
       for (Tarifs i in all.tarifs) {
-        print("data : ${i.ord}");
+        print("data : ${i.torder}");
         int tariff = await repo.insertTarifs(i);
         print("info: Tarif: $tariff");
       }
@@ -30,6 +30,14 @@ class HomeBloc extends BaseBloc {
       }
       List<Ism> isms = await repo.getIsms();
       isms.forEach((element) {
+        print("db" + element.id);
+      });
+      for (var i in all.category) {
+        int category = await repo.insertCategory(i);
+        print("info: category: $category");
+      }
+      List<Category> categories = await repo.getCategory();
+      categories.forEach((element) {
         print("db" + element.id);
       });
 

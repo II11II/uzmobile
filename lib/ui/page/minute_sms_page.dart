@@ -32,19 +32,24 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
       appBar: AppBar(
         title: Text("minute_sms".tr().toUpperCase()),
       ),
-      body: StreamBuilder<List<Ism>>(
+      body: StreamBuilder<All>(
           stream: bloc.minuteSms,
           builder: (context, snapshot) {
             if (snapshot.hasData)
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ListView.builder(
-                    itemCount: snapshot.data.length,
+                    itemCount: snapshot.data.ism.length,
                     itemBuilder: (context, index) {
+                      bloc.prev = bloc.curr;
+                      bloc.curr = snapshot.data.ism[index].catid;
+
+                      if (bloc.prev != bloc.curr) bloc.i += 1;
+
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                           if (snapshot.data[index].catUz != null && snapshot.data[index].catUz != '')
+                          if (bloc.prev != bloc.curr)
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
@@ -54,12 +59,22 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                 ),
                                 Text(
                                   context.locale.languageCode == 'ru'
-                                      ? snapshot.data[index].catRu
-                                      : snapshot.data[index].catUz,
+                                      ? snapshot.data.category[bloc.i].catRu
+                                      : snapshot.data.category[bloc.i].catUz,
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor),
                                 ),
-                                Divider()
+                                Divider(),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: BalanceButton(
+                                    title: "check_balance".tr(),
+                                    onPressed: () async {
+                                      await FlutterPhoneDirectCaller.callNumber(
+                                          snapshot.data.category[bloc.i].kod + "#");
+                                    },
+                                  ),
+                                )
                               ],
                             )
                           else
@@ -74,10 +89,10 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                 },
                                 leading: Text(
                                     context.locale.languageCode == 'ru'
-                                        ? snapshot.data[index].titleRu
-                                        : snapshot.data[index].titleUz),
+                                        ? snapshot.data.ism[index].titleRu
+                                        : snapshot.data.ism[index].titleUz),
                                 trailing: Text(
-                                  snapshot.data[index].price,
+                                  snapshot.data.ism[index].price,
                                   style:
                                       TextStyle(color: Colors.indigo.shade900),
                                 ),
@@ -101,11 +116,11 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                                             .languageCode ==
                                                         'ru'
                                                     ? snapshot
-                                                        .data[index].descRu
+                                                        .data.ism[index].descRu
                                                         .replaceAll(
                                                             '<br>', '\n')
                                                     : snapshot
-                                                        .data[index].descUz
+                                                        .data.ism[index].descUz
                                                         .replaceAll(
                                                             '<br>', '\n')),
                                               ),
@@ -114,7 +129,7 @@ class _MinuteSmsPageState extends State<MinuteSmsPage> {
                                               title: "buy".tr().toUpperCase(),
                                               onPressed: () async {
                                                 String urlString =
-                                                    'tel:${snapshot.data[index].kod.contains('#', snapshot.data[index].kod.length - 1) ? snapshot.data[index].kod : snapshot.data[index].kod + "#"}';
+                                                    'tel:${snapshot.data.ism[index].kod.contains('#', snapshot.data.ism[index].kod.length - 1) ? snapshot.data.ism[index].kod : snapshot.data.ism[index].kod + "#"}';
                                                 if (await canLaunch(
                                                     urlString)) {
                                                   await FlutterPhoneDirectCaller

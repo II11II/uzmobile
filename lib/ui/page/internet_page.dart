@@ -19,19 +19,7 @@ class InternetPage extends StatefulWidget {
 
 class _InternetPageState extends State<InternetPage> {
   final bloc = InternetBloc();
-  List<Tab> kTabs = [
-    Tab(
-      child: Text('paketi'.tr().toUpperCase()),
-    ),
-    Tab(
-      child: Text('night'.tr().toUpperCase()),
-    ),
-    Tab(
-      child: Text('perDay'.tr().toUpperCase()),
-    ), Tab(
-      child: Text('non-stop'.toUpperCase()),
-    ),
-  ];
+
 
   @override
   void initState() {
@@ -51,54 +39,62 @@ class _InternetPageState extends State<InternetPage> {
           children: [
             Container(
               constraints: BoxConstraints.expand(height: 50),
-              child: TabBar(isScrollable: true,
-                labelColor: Colors.black,
-                tabs: kTabs,
+              child: StreamBuilder<List<Category>>(
+                stream: bloc.tabs,
+                builder: (context, snapshot) {
+                  if(snapshot.hasData)
+                  return TabBar(isScrollable: true,
+                    labelColor: Colors.black,
+
+                  tabs: List.generate(snapshot.data.length, (index) =>  Tab(
+                    child: Text(context.locale.languageCode=='ru'?snapshot.data[index].catRu:snapshot.data[index].catUz),
+                  ),),
+                  );
+                  else return Container();
+                }
               ),
             ),
             Expanded(
-              child: IndexedStack(children: [
-                TabBarView(
-                  children: [
-                    StreamBuilder<Object>(
-                        stream: bloc.paketi,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData)
-                            return customTab(
-                                snapshot.data, bloc.showButtonsPaketi);
-                          else
-                            return Container();
-                        }),
-                    StreamBuilder<Object>(
-                        stream: bloc.night,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData)
-                            return customTab(
-                                snapshot.data, bloc.showButtonsNight);
-                          else
-                            return Container();
-                        }),
-                    StreamBuilder<Object>(
-                        stream: bloc.kunlik,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData)
-                            return customTab(
-                                snapshot.data, bloc.showButtonsKunlik);
-                          else
-                            return Container();
-                        }),
-                         StreamBuilder<Object>(
-                        stream: bloc.oylik,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData)
-                            return customTab(
-                                snapshot.data, bloc.showButtonsOylik);
-                          else
-                            return Container();
-                        }),
-                  ],
-                ),
-              ]),
+              child: TabBarView(
+                children: [
+                  StreamBuilder<Object>(
+                      stream: bloc.paketi,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData)
+                          return customTab(
+                              snapshot.data, bloc.showButtonsPaketi);
+                        else
+                          return Container();
+                      }),
+                  StreamBuilder<Object>(
+                      stream: bloc.night,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData)
+                          return customTab(
+                              snapshot.data, bloc.showButtonsNight);
+                        else
+                          return Container();
+                      }),
+                  StreamBuilder<Object>(
+                      stream: bloc.kunlik,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData)
+                          return customTab(
+                              snapshot.data, bloc.showButtonsKunlik);
+                        else
+                          return Container();
+                      }),
+                       StreamBuilder<Object>(
+                      stream: bloc.oylik,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData)
+                          return customTab(
+                              snapshot.data, bloc.showButtonsOylik);
+                        else
+                          return Container();
+                      }),
+                ],
+              ),
             ),
           ],
         ),
@@ -111,92 +107,114 @@ class _InternetPageState extends State<InternetPage> {
       height: MediaQuery.of(context).size.height * 0.70,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (data[index].catUz != null && data[index].catUz != '')
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          context.locale.languageCode == 'ru'
-                              ? data[index].catRu
-                              : data[index].catUz,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                        Divider()
-                      ],
-                    )
-                  else
-                    Container(),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                        onTap: () {
-                          showButtons[index].value = !showButtons[index].value;
-                        },
-                        leading: Text(data[index].titleRu),
-                        trailing: Text(
-                          data[index].price,
-                          style: TextStyle(color: Colors.indigo.shade900),
-                        ),
-                      ),
-                      ValueListenableBuilder(
-                          valueListenable: showButtons[index],
-                          builder: (ctx, v, w) {
-                            if (v)
-                              return Container(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        showButtons[index].value =
-                                            !showButtons[index].value;
-                                      },
-                                      child: Container(
-                                        child: Text(
-                                            context.locale.languageCode == 'ru'
-                                                ? data[index]
-                                                    .descRu
-                                                    .replaceAll('<br>', '\n')
-                                                : data[index]
-                                                    .descUz
-                                                    .replaceAll('<br>', '\n')),
+//                  if (data.category[index].catUz != null && data.category[index].catUz != '')
+//                    Column(
+//                      crossAxisAlignment: CrossAxisAlignment.start,
+//                      mainAxisSize: MainAxisSize.min,
+//                      children: [
+//                        SizedBox(
+//                          height: 8,
+//                        ),
+//                        Text(
+//                          context.locale.languageCode == 'ru'
+//                              ? data.category[index].catRu
+//                              : data.category[index].catUz,
+//                          style:
+//                              TextStyle(color: Theme.of(context).primaryColor),
+//                        ),
+//                        Divider()
+//                      ],
+//                    )
+//                  else
+//                    Container(),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListTile(
+                              onTap: () {
+                                showButtons[index].value = !showButtons[index].value;
+                              },
+                              leading: Text(data[index].titleRu),
+                              trailing: Text(
+                                data[index].price,
+                                style: TextStyle(color: Colors.indigo.shade900),
+                              ),
+                            ),
+                            ValueListenableBuilder(
+                                valueListenable: showButtons[index],
+                                builder: (ctx, v, w) {
+                                  if (v)
+                                    return Container(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              showButtons[index].value =
+                                                  !showButtons[index].value;
+                                            },
+                                            child: Container(
+                                              child: Text(
+                                                  context.locale.languageCode == 'ru'
+                                                      ? data[index]
+                                                          .descRu
+                                                          .replaceAll('<br>', '\n')
+                                                      : data[index]
+                                                          .descUz
+                                                          .replaceAll('<br>', '\n')),
+                                            ),
+                                          ),
+                                          BalanceButton(
+                                            title: "buy".tr().toUpperCase(),
+                                            onPressed: () async {
+                                              String urlString =
+                                                  'tel:${data[index].kod+"#"}';
+                                              if (await canLaunch(urlString)) {
+                                                await
+                                                 FlutterPhoneDirectCaller
+                                                    .callNumber(urlString);
+                                              }
+                                            },
+                                          )
+                                        ],
                                       ),
-                                    ),
-                                    BalanceButton(
-                                      title: "buy".tr().toUpperCase(),
-                                      onPressed: () async {
-                                        String urlString =
-                                            'tel:${data[index].kod+"#"}';
-                                        if (await canLaunch(urlString)) {
-                                          await 
-                                           FlutterPhoneDirectCaller
-                                              .callNumber(urlString);
-                                        }
-                                      },
-                                    )
-                                  ],
-                                ),
-                              );
-                            else
-                              return Container();
-                          })
-                    ],
-                  ),
-                ],
-              );
-            }),
+                                    );
+                                  else
+                                    return Container();
+                                })
+
+                          ],
+                        ),
+                      ],
+                    );
+                  }),
+            ),
+            StreamBuilder<List<Category>>(
+                stream: bloc.tabs,
+                builder: (context, snapshot) {
+                  if(snapshot.hasData)
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: BalanceButton(title:"check_balance".tr(),onPressed: ()async{
+                        await
+                        FlutterPhoneDirectCaller
+                            .callNumber(snapshot.data[0].kod+"#");
+                      },),
+                    );
+                  else return Container();
+                }
+            ),
+          ],
+        ),
       ),
     );
   }
